@@ -1,0 +1,48 @@
+<div class="app-container">
+  <div class="form-wrapper">
+    <h1 class="form-title">Login</h1>
+    <form [formGroup]="form" (ngSubmit)="OnSubmit(form)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required />
+      <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        Add email!
+      </span>
+
+      <input
+        type="{{ showPassword ? 'text' : 'password' }}"
+        id="password"
+        formControlName="password"
+        minlength="8"
+      />
+      <span
+        *ngIf="
+      form.get('password')?.invalid &&
+      form.get('password')?.touched &&
+      form.get('password')?.errors?.['minlength']
+    "
+      >
+        Password must be at least 8 characters long!
+      </span>
+      <span
+        *ngIf="
+      form.get('password')?.invalid &&
+      form.get('password')?.touched &&
+      !form.get('password')?.errors?.['minlength']
+    "
+      >
+        Please add a password!
+      </span>
+      <div class="checkbox">
+        <label for="showPassword">Show Password</label>
+        <input
+          type="checkbox"
+          id="checkbox"
+          formControlName="checkbox"
+          (change)="togglePasswordVisibility()"
+        />
+      </div>
+
+      <button type="submit" [disabled]="form.invalid">Sign Up</button>
+    </form>
+  </div>
+</div>

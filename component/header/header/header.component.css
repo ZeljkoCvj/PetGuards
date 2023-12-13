@@ -1,0 +1,24 @@
+.header {
+  background-color: #182123;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+}
+.header .logo {
+  margin-left: 15px;
+}
+.header .navigation {
+  display: flex;
+  align-items: center;
+}
+.header .navigation a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  margin: 0 15px;
+}
+.header .navigation a:hover {
+  color: bisque;
+}/*# sourceMappingURL=header.component.css.map */

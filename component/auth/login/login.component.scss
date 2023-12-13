@@ -1,0 +1,71 @@
+.app-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 91.5vh;
+  background-color: #343d3f;
+
+  .form-wrapper {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .form-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      label {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #555;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        text-align: left;
+      }
+      .checkbox {
+        display: flex;
+        align-items: center;
+      }
+
+      .checkbox input {
+        margin-right: 8px;
+      }
+      input {
+        padding: 10px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        // border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 8px 20px;
+
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      input.ng-invalid.ng-touched {
+        border: 1px solid red;
+      }
+
+      span {
+        padding: 2px;
+        margin-bottom: 5px;
+        color: red;
+      }
+    }
+  }
+}
