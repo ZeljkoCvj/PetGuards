@@ -1,9 +1,122 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
+import { authData } from "../interface/auth.data";
+import { User } from "../modules/user.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
+  user = new BehaviorSubject<User | null>(null);
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private toastr: ToastrService
+  ) {}
 
-  constructor() { }
+  singup(email: string, password: string) {
+    this.http
+      .post<authData>(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDLFtHtdWXBkZaIy8FmBJjyVUcXoGAOn1g",
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        catchError((error) => this.handleError(error, this.toastr)),
+        tap((resdata) => {
+          this.handleAuth(
+            resdata.email,
+            resdata.localId,
+            resdata.idToken,
+            resdata.expiresIn
+          );
+        })
+      )
+      .subscribe((result) => {
+        this.route.navigate(["/myaccount"]);
+        this.toastr.success("Success created account");
+      });
+  }
+
+  login(email: string, password: string) {
+    return this.http
+      .post<authData>(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDLFtHtdWXBkZaIy8FmBJjyVUcXoGAOn1g",
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        catchError((error) => this.handleError(error, this.toastr)),
+        tap((resdata) => {
+          this.handleAuth(
+            resdata.email,
+            resdata.localId,
+            resdata.idToken,
+            resdata.expiresIn
+          );
+        })
+      )
+      .subscribe((result) => {
+        this.route.navigate(["/myaccount"]);
+      });
+  }
+
+  logout() {
+    this.user.next(null);
+    this.route.navigate(["/login"]);
+  }
+
+  private handleAuth(
+    email: string,
+    localId: string,
+    token: string,
+    expiriesIn: string
+  ) {
+    const expDate = new Date(new Date().getTime() + +expiriesIn * 1000);
+    const user = new User(email, localId, token, expiriesIn);
+    this.user.next(user);
+  }
+
+  handleError(error: HttpErrorResponse, toastr: ToastrService) {
+    let errorMessage = "Unknown error thrown";
+
+    if (!error.error || !error.error.error) {
+      return throwError(errorMessage);
+    }
+    switch (error.error.error.message) {
+      case "EMAIL_EXISTS":
+        errorMessage = "Email exist";
+        toastr.error(errorMessage);
+        break;
+
+      case "EMAIL_NOT_FOUND":
+        errorMessage =
+          "There is no user record corresponding to this identifier. The user may have been deleted.";
+        toastr.error(errorMessage);
+        break;
+
+      case "INVALID_PASSWORD":
+        errorMessage =
+          "The password is invalid or the user does not have a password.";
+        toastr.error(errorMessage);
+        break;
+
+      case "USER_DISABLED":
+        errorMessage =
+          "The user account has been disabled by an administrator.";
+        toastr.error(errorMessage);
+        break;
+    }
+
+    return throwError(errorMessage);
+  }
 }
