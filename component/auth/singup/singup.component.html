@@ -8,14 +8,6 @@
         Add user name!
       </span>
 
-      <label for="surname">Surname:</label>
-      <input type="text" id="surname" formControlName="surrname" required />
-      <span
-        *ngIf="form.get('surrname')?.invalid && form.get('surrname')?.touched"
-      >
-        Add user surname!
-      </span>
-
       <label for="email">Email:</label>
       <input type="email" id="email" formControlName="email" required />
       <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">

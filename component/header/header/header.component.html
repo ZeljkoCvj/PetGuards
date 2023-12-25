@@ -1,12 +1,12 @@
 <header class="header">
   <div class="logo">
-    <!-- <img src="path/to/your/logo.png" alt="Logo" /> -->
     <p>Logo</p>
   </div>
   <div class="navigation">
     <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
     <a routerLink="/singup" *ngIf="!isLoggedIn">Singup</a>
-    <a *ngIf="isLoggedIn" (click)="logOut()">Logout</a>
+
     <a *ngIf="isLoggedIn" routerLink="/myaccount">My Account</a>
+    <a *ngIf="isLoggedIn" (click)="logOut()">Logout</a>
   </div>
 </header>

@@ -11,6 +11,7 @@ import { User } from "../modules/user.model";
 })
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
+
   constructor(
     private http: HttpClient,
     private route: Router,
@@ -69,12 +70,67 @@ export class AuthService {
         this.route.navigate(["/myaccount"]);
       });
   }
+  deleteUser() {
+    const user = this.user.value;
+
+    if (!user) {
+      console.error("No user logged in.");
+      return;
+    }
+
+    this.http
+      .post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyDLFtHtdWXBkZaIy8FmBJjyVUcXoGAOn1g",
+        {
+          idToken: user.token,
+        }
+      )
+
+      .subscribe(() => {
+        this.toastr.show("User success deleted");
+        this.logout();
+      });
+  }
 
   logout() {
     this.user.next(null);
+    localStorage.removeItem("userAccount");
     this.route.navigate(["/login"]);
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpireDate: string;
+    } = JSON.parse(localStorage.getItem("userAccount"));
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpireDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
+  }
+  getUserId() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpireDate: string;
+    } = JSON.parse(localStorage.getItem("userAccount"));
+
+    return userData.id ? userData.id : null;
+  }
   private handleAuth(
     email: string,
     localId: string,
@@ -82,8 +138,10 @@ export class AuthService {
     expiriesIn: string
   ) {
     const expDate = new Date(new Date().getTime() + +expiriesIn * 1000);
-    const user = new User(email, localId, token, expiriesIn);
+    const user = new User(email, localId, token, expDate);
+
     this.user.next(user);
+    localStorage.setItem("userAccount", JSON.stringify(user));
   }
 
   handleError(error: HttpErrorResponse, toastr: ToastrService) {

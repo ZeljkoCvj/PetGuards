@@ -1,0 +1,43 @@
+<p>Edit user</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" required />
+    <span
+      *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+    >
+      Add name!
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="surrname">Surrname:</label>
+    <input type="text" id="surrname" formControlName="surrname" required />
+    <span
+      *ngIf="
+        userForm.get('surrname')?.invalid && userForm.get('surrname')?.touched
+      "
+    >
+      Add surrname!
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="hobby">Hobby:</label>
+    <input type="text" id="hobby" formControlName="hobby" />
+  </div>
+
+  <div class="form-group">
+    <label for="ayourself">About yourself:</label>
+    <textarea id="ayourself" formControlName="ayourself" required></textarea>
+    <span
+      *ngIf="
+        userForm.get('ayourself')?.invalid && userForm.get('ayourself')?.touched
+      "
+    >
+      Add something about yourself!
+    </span>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>

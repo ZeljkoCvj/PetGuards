@@ -17,7 +17,8 @@ export class SingupComponent implements OnInit {
   OnSubmit(form: any): void {
     const email = form.value.email;
     const password = form.value.password;
-
+    const name = form.value.name;
+    const surrname = form.value.surrname;
     this.AuthService.singup(email, password);
     this.form.reset();
   }
@@ -30,7 +31,7 @@ export class SingupComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      surrname: new FormControl(null, Validators.required),
+
       checkbox: new FormControl(null),
       password: new FormControl(null, [
         Validators.required,

@@ -9,15 +9,13 @@ import { Observable } from "rxjs";
 import { UserDataService } from "../services/user-data.service";
 
 @Injectable()
-export class Resolvere
-  implements Resolve<any[] | Observable<any[]> | Promise<any[]>>
-{
+export class Resolvere implements Resolve<any[]> {
   constructor(private userService: UserDataService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): any[] | Observable<any[]> | Promise<any[]> {
+  ): Observable<any[]> {
     return this.userService.fetchData();
   }
 }
