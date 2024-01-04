@@ -7,6 +7,8 @@ import { MyaccountComponent } from "./component/myaccount/myaccount.component";
 // import { ProfileComponent } from "./component/profile/profile.component";
 import { Resolvere } from "./guards/fetchdata.resolver";
 import { EditUserComponent } from "./component/myaccount/edit-user/edit-user.component";
+import { SearchComponent } from "./component/search/search.component";
+import { UserDetailComponent } from "./component/user-detail/user-detail.component";
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
     path: "singup",
     component: SingupComponent,
   },
+  {
+    path: "search",
+    component: SearchComponent,
+  },
+  { path: "user-details/:uid", component: UserDetailComponent },
   {
     path: "myaccount",
     component: MyaccountComponent,

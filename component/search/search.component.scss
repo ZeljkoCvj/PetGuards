@@ -1,0 +1,37 @@
+.search-container {
+  position: relative;
+
+  input {
+    padding: 8px;
+    width: 300px;
+  }
+
+  .user-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .user-item {
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      &:last-child {
+        border-bottom: none;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+}
+.user-item:hover {
+  background-color: grey;
+}

@@ -1,0 +1,10 @@
+<div class="center-container">
+  <div *ngFor="let user of user" class="user-card">
+    <span *ngIf="userExists">Ovo ste vi</span>
+    <p>{{ user.name }}</p>
+    <p>{{ user.surname }}</p>
+    <p>{{ user.hoby }}</p>
+    <p>{{ user.aboutYourself }}</p>
+    <button (click)="addUser()">Add User</button>
+  </div>
+</div>

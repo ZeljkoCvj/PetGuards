@@ -29,29 +29,33 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-align: left;
 }
+.app-container .form-wrapper form .checkbox {
+  display: flex;
+  align-items: center;
+}
+.app-container .form-wrapper form .checkbox input {
+  margin-right: 8px;
+}
 .app-container .form-wrapper form input {
   padding: 10px;
   margin-bottom: 16px;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-}
-.app-container .form-wrapper form input:focus {
-  outline: none;
-  border-color: #4caf50;
 }
 .app-container .form-wrapper form button {
   margin-left: auto;
   margin-right: auto;
   padding: 8px 20px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
   border-radius: 6px;
   cursor: pointer;
 }
-.app-container .form-wrapper form button:hover {
-  background-color: #45a049;
+.app-container .form-wrapper form input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+.app-container .form-wrapper form span {
+  padding: 2px;
+  margin-bottom: 5px;
+  color: red;
 }/*# sourceMappingURL=login.component.css.map */

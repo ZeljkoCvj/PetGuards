@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserDataService } from "../../../services/user-data.service";
-import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-edit-user",
@@ -11,10 +11,7 @@ import { ActivatedRoute } from "@angular/router";
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
   data: any;
-  constructor(
-    private userData: UserDataService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private userData: UserDataService, private router: Router) {}
   ngOnInit(): void {
     this.userForm = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -31,5 +28,6 @@ export class EditUserComponent implements OnInit {
 
     this.userData.updateData(namee, surrname, hobby, ayourself);
     this.userForm.reset();
+    this.router.navigate(["/myaccount"]);
   }
 }

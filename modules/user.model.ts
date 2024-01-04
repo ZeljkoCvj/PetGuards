@@ -1,4 +1,7 @@
 export class User {
+  map(arg0: (user: any) => any): any {
+    throw new Error("Method not implemented.");
+  }
   constructor(
     public email: string,
 

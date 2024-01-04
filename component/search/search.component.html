@@ -1,0 +1,16 @@
+<h2>Search User</h2>
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Pretraga korisnika"
+    [(ngModel)]="inputStr"
+    (input)="inputField()"
+  />
+  <div *ngIf="inputStr && filteredUsers.length > 0" class="user-list">
+    <div *ngFor="let user of filteredUsers" class="user-item">
+      <a [routerLink]="['/user-details', user.uid]">
+        {{ user.email }}
+      </a>
+    </div>
+  </div>
+</div>

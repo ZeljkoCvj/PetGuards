@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Postavite visinu na 100% visine ekrana kako biste centrirali vertikalno */
+}
+
+.user-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 32px; /* Povećajte unutarnji razmak */
+  margin: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px; /* Povećajte veličinu dugmeta */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Povećajte veličinu fonta */
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+span {
+  border: 1px solid red;
+  color: red;
+  padding: 5px;
+}/*# sourceMappingURL=user-detail.component.css.map */

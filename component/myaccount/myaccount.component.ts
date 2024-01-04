@@ -41,7 +41,6 @@ export class MyaccountComponent implements OnInit {
       }
     });
 
-    console.log(this.data);
     this.authS.user.subscribe((res) => {
       if (res) {
         this.name = res.email;

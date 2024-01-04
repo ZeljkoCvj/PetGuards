@@ -5,7 +5,7 @@
   <div class="navigation">
     <a routerLink="/login" *ngIf="!isLoggedIn">Login</a>
     <a routerLink="/singup" *ngIf="!isLoggedIn">Singup</a>
-
+    <a *ngIf="isLoggedIn" routerLink="/search">Search User</a>
     <a *ngIf="isLoggedIn" routerLink="/myaccount">My Account</a>
     <a *ngIf="isLoggedIn" (click)="logOut()">Logout</a>
   </div>

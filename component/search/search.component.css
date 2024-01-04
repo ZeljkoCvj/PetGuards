@@ -1,0 +1,35 @@
+.search-container {
+  position: relative;
+}
+.search-container input {
+  padding: 8px;
+  width: 300px;
+}
+.search-container .user-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.search-container .user-list .user-item {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.search-container .user-list .user-item:last-child {
+  border-bottom: none;
+}
+.search-container .user-list .user-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.user-item:hover {
+  background-color: grey;
+}/*# sourceMappingURL=search.component.css.map */

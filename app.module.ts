@@ -10,13 +10,17 @@ import { LoginComponent } from "./component/auth/login/login.component";
 import { SingupComponent } from "./component/auth/singup/singup.component";
 import { HeaderComponent } from "./component/header/header/header.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { MyaccountComponent } from "./component/myaccount/myaccount.component";
 import { AuthDataInterceptor } from "./inteceptor/user-params.interceptor";
-// import { ProfileComponent } from "./component/profile/profile.component";
+import { environment } from "./envuroment/enviroment";
 import { Resolvere } from "./guards/fetchdata.resolver";
-import { EditUserComponent } from './component/myaccount/edit-user/edit-user.component';
+import { EditUserComponent } from "./component/myaccount/edit-user/edit-user.component";
+import { SearchComponent } from './component/search/search.component';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,19 +31,26 @@ import { EditUserComponent } from './component/myaccount/edit-user/edit-user.com
     HeaderComponent,
     MyaccountComponent,
     EditUserComponent,
+    SearchComponent,
+    UserDetailComponent,
     // ProfileComponent,
   ],
   imports: [
     BrowserModule,
+    AngularFireAuthModule,
     AppRoutingModule,
+    AngularFirestoreModule,
+
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     ToastrService,
+
     Resolvere,
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./services/auth.service";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { FirebaseService } from "./services/firebase.service";
 
 @Component({
   selector: "app-root",
