@@ -25,6 +25,7 @@ admin.initializeApp({
 });
 
 const auth = admin.auth();
+const firestore = admin.firestore(); // Dodajte ovu liniju kako biste inicijalizovali Firestore
 
 const app = express();
 
@@ -38,8 +39,8 @@ app.get("/api/korisnici", async (req, res) => {
       uid: userRecord.uid,
       email: userRecord.email,
       displayName: userRecord.displayName,
-      // Dodaj još korisničkih svojstava po potrebi
     }));
+
     res.json(korisnici);
   } catch (error) {
     console.error("Greška pri listanju korisnika:", error);

@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+
+import { FirebaseService } from "../../services/firebase.service";
+import { userAuth } from "../../interface/authUsr";
 
 @Component({
   selector: "app-search",
@@ -8,15 +9,14 @@ import { Observable } from "rxjs";
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  searchResults: any[] = [];
-  filteredUsers: any[] = [];
+  searchResults: userAuth[] = [];
+  filteredUsers: userAuth[] = [];
   inputStr = "";
-  private apiUrl = "http://localhost:3000/api/korisnici";
 
-  constructor(private http: HttpClient) {}
+  constructor(private firebase: FirebaseService) {}
 
   ngOnInit() {
-    this.dobaviKorisnike().subscribe((res) => {
+    this.firebase.getUser().subscribe((res) => {
       this.searchResults = res;
       this.filteredUsers = [...this.searchResults];
     });
@@ -26,14 +26,10 @@ export class SearchComponent implements OnInit {
     const inputValue = this.inputStr.toLowerCase().trim();
     if (inputValue) {
       this.filteredUsers = this.searchResults.filter((user) => {
-        return user.email && user.email.toLowerCase().includes(inputValue);
+        return user?.displayName?.toLowerCase().includes(inputValue);
       });
     } else {
       this.filteredUsers = [...this.searchResults];
     }
-  }
-
-  dobaviKorisnike(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
   }
 }

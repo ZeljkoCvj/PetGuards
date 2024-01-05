@@ -18,13 +18,14 @@ export class AuthService {
     private toastr: ToastrService
   ) {}
 
-  singup(email: string, password: string) {
+  singup(email: string, password: string, name?: string) {
     this.http
       .post<authData>(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDLFtHtdWXBkZaIy8FmBJjyVUcXoGAOn1g",
         {
           email: email,
           password: password,
+          displayName: name,
           returnSecureToken: true,
         }
       )
@@ -40,7 +41,7 @@ export class AuthService {
         })
       )
       .subscribe((result) => {
-        this.route.navigate(["/myaccount"]);
+        this.route.navigate(["/editUser"]);
         this.toastr.success("Success created account");
       });
   }

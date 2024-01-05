@@ -1,22 +1,25 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, NgForm, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrl: "./login.component.scss",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   showPassword: boolean = false;
 
   constructor(private auth: AuthService) {}
-  OnSubmit(form: any) {
-    const email = form.value.email;
-    const password = form.value.password;
-    this.auth.login(email, password);
-    form.reset();
+
+  onSubmit() {
+    if (this.form.valid) {
+      const email = this.form.value.email;
+      const password = this.form.value.password;
+      this.auth.login(email, password);
+      this.form.reset();
+    }
   }
 
   togglePasswordVisibility() {

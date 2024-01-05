@@ -10,7 +10,7 @@ export class FirebaseService {
 
   constructor(private http: HttpClient) {}
 
-  dobaviKorisnike(): Observable<any[]> {
+  getUser(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 }

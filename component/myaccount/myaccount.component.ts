@@ -1,20 +1,22 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
+
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserDataService } from "../../services/user-data.service";
-import { ActivatedRoute, Route, Router } from "@angular/router";
+import { user } from "../../interface/user";
 
 @Component({
   selector: "app-myaccount",
   templateUrl: "./myaccount.component.html",
-  styleUrl: "./myaccount.component.scss",
+  styleUrls: ["./myaccount.component.scss"],
 })
 export class MyaccountComponent implements OnInit {
-  data: any[] = [];
+  data: user[] = [];
   exist: boolean;
   userForm: FormGroup;
   name: string;
-  namee: string;
+
   constructor(
     private authS: AuthService,
     private userData: UserDataService,
@@ -22,41 +24,16 @@ export class MyaccountComponent implements OnInit {
     private router: Router
   ) {}
 
-  onSubmit(userForm: any) {
-    const namee = userForm.name;
-    const surrname = userForm.surrname;
-    const hobby = userForm.hobby;
-    const ayourself = userForm.ayourself;
-
-    this.userData.postData(namee, surrname, hobby, ayourself);
-    this.userForm.reset();
-  }
   ngOnInit(): void {
     this.route.data.subscribe((userInfo) => {
       this.data = userInfo["status"];
-      if (this.data.length === 0) {
-        this.exist = false;
-      } else {
-        this.exist = true;
-      }
-    });
-
-    this.authS.user.subscribe((res) => {
-      if (res) {
-        this.name = res.email;
-      }
-    });
-
-    this.userForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      surrname: new FormControl(null, Validators.required),
-      hobby: new FormControl(null),
-      ayourself: new FormControl(null, Validators.required),
+      this.exist = this.data.length > 0;
     });
   }
 
-  deleteUser() {
+  deleteUser(id: string) {
     this.authS.deleteUser();
+    this.userData.delateData(id);
   }
 
   editUser() {

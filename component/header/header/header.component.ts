@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
 import { Subscription } from "rxjs";
+import { UserDataService } from "../../../services/user-data.service";
 
 @Component({
   selector: "app-header",
@@ -9,9 +10,13 @@ import { Subscription } from "rxjs";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
+  show = false;
   private userSub!: Subscription;
 
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private dataService: UserDataService
+  ) {}
 
   logOut() {
     this.auth.logout();

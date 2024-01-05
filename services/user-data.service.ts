@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { map } from "rxjs/operators";
+import { user } from "../interface/user";
 @Injectable({
   providedIn: "root",
 })
@@ -50,7 +51,7 @@ export class UserDataService {
     const userId = this.AuthService.getUserId();
 
     // Prvo dohvati trenutne podatke
-    this.fetchData().subscribe((currentData: any[]) => {
+    this.fetchData().subscribe((currentData: user[]) => {
       // Pronađi indeks korisnika u nizu
       const userIndex = currentData.findIndex((user) => user.userId === userId);
 
@@ -80,5 +81,14 @@ export class UserDataService {
           this.fetchData();
         });
     });
+  }
+  delateData(id: string) {
+    this.http
+      .delete(
+        `https://petsstuff-5f9e1-default-rtdb.europe-west1.firebasedatabase.app/account${id}.json`
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }

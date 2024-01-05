@@ -1,8 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { FirebaseService } from "../../services/firebase.service";
+
 import { Observable, map } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { FirebaseService } from "../../services/firebase.service";
+import { user } from "../../interface/user";
+import { userAuth } from "../../interface/authUsr";
+import { authData } from "../../interface/auth.data";
 
 @Component({
   selector: "app-user-detail",
@@ -11,13 +15,11 @@ import { HttpClient } from "@angular/common/http";
 })
 export class UserDetailComponent implements OnInit {
   private api = `https://petsstuff-5f9e1-default-rtdb.europe-west1.firebasedatabase.app`;
-  userData: any;
+  userData: authData;
   userExists: boolean = false;
   uid: string;
-  user: any[] = [];
+  user: user[] = [];
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
-
-  addUser() {}
 
   ngOnInit() {
     const storedUserData = localStorage.getItem("userAccount");

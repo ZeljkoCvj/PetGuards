@@ -1,6 +1,7 @@
 export interface authData {
+  id: any;
   kind: string;
-  name: string;
+  displayName: string;
   idToken: string;
   email: string;
   refreshToken: string;

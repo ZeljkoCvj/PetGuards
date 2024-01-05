@@ -1,4 +1,4 @@
-<p>Edit user</p>
+<p *ngIf="data.length === 0">Welcome : {{ names }}</p>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
   <div class="form-group">
     <label for="name">Name:</label>
